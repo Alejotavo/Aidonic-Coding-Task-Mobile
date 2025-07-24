@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 
 interface FiltersProps {
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginBottom: 12,
     gap: 8,
+    marginTop: 16, // 1rem aprox
   },
   pickerWrapper: {
     flex: 1,

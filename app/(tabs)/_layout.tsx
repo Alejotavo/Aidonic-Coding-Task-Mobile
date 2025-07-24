@@ -15,12 +15,11 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
+        headerShown: true,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
             position: 'absolute',
           },
           default: {},
@@ -29,14 +28,20 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: 'Aid Distribution list',
+          headerStyle: { backgroundColor: '#2563eb' },
+          headerTintColor: '#fff',
+          headerTitleStyle: { fontWeight: 'bold', letterSpacing: 1 },
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />, 
         }}
       />
       <Tabs.Screen
         name="dashboard"
         options={{
-          title: 'Dashboard',
+          title: 'Aid Distribution Dashboard',
+          headerStyle: { backgroundColor: '#2563eb' },
+          headerTintColor: '#fff',
+          headerTitleStyle: { fontWeight: 'bold', letterSpacing: 1 },
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="chart.pie.fill" color={color} />, 
         }}
       />
