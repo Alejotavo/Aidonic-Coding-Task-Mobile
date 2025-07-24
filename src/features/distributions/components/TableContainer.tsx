@@ -1,11 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View } from 'react-native';
-import { distributions } from '../services/MockApi';
-import Table from './Table';
-import Filters from './Filters';
-import { Pagination } from './Pagination';
 import { useFilteredDistributions } from '../hooks/useFilteredDistributions';
 import { usePaginatedData } from '../hooks/usePaginatedData';
+import { distributions } from '../services/MockApi';
+import Filters from './Filters';
+import { Pagination } from './Pagination';
+import Table from './Table';
 
 const getUnique = (arr: string[]) => Array.from(new Set(arr));
 
@@ -35,12 +35,16 @@ const TableContainer: React.FC = () => {
         onStatusChange={setStatus}
         onRegionChange={setRegion}
       />
-      <Table distributions={paginated} />
-      <Pagination
-        currentPage={currentPage}
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={setCurrentPage}
+      <Table
+        distributions={paginated}
+        listFooterComponent={
+          <Pagination
+            currentPage={currentPage}
+            totalItems={totalItems}
+            itemsPerPage={itemsPerPage}
+            onPageChange={setCurrentPage}
+          />
+        }
       />
     </View>
   );

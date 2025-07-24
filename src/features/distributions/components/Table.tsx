@@ -1,10 +1,12 @@
-import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import type { Distribution } from '../models/Distribution';
 import { useRouter } from 'expo-router';
+import React from 'react';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import type { Distribution } from '../models/Distribution';
 
 interface TableProps {
   distributions: Distribution[];
+  listFooterComponent?: React.ReactElement | null;
 }
 
 const statusColors: Record<string, { bg: string; color: string; border: string }> = {
@@ -14,8 +16,9 @@ const statusColors: Record<string, { bg: string; color: string; border: string }
   Default: { bg: '#f3f4f6', color: '#374151', border: '#d1d5db' },
 };
 
-const Table: React.FC<TableProps> = ({ distributions }) => {
+const Table: React.FC<TableProps> = ({ distributions, listFooterComponent }) => {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const renderItem = ({ item }: { item: Distribution }) => {
     const statusStyle = statusColors[item.status] || statusColors.Default;
     return (
@@ -45,7 +48,8 @@ const Table: React.FC<TableProps> = ({ distributions }) => {
       data={distributions}
       renderItem={renderItem}
       keyExtractor={item => item.id}
-      contentContainerStyle={styles.list}
+      contentContainerStyle={[styles.list, { paddingBottom: insets.bottom + 56 }]}
+      ListFooterComponent={listFooterComponent}
     />
   );
 };
@@ -53,7 +57,7 @@ const Table: React.FC<TableProps> = ({ distributions }) => {
 const styles = StyleSheet.create({
   list: {
     paddingHorizontal: 12,
-    paddingBottom: 8,
+    paddingBottom: 60,
   },
   card: {
     backgroundColor: '#fff',
