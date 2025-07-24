@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Filters from '../../../shared/components/Filters';
+import { Pagination } from '../../../shared/components/Pagination';
+import Table from '../../../shared/components/Table';
 import { distributions } from '../../../shared/services/MockApi';
 import { useFilteredDistributions } from '../hooks/useFilteredDistributions';
 import { usePaginatedData } from '../hooks/usePaginatedData';
-import Filters from './Filters';
-import { Pagination } from './Pagination';
-import Table from './Table';
 
 const getUnique = (arr: string[]) => Array.from(new Set(arr));
 
