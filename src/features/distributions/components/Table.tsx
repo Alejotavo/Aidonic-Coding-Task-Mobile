@@ -7,6 +7,7 @@ import type { Distribution } from '../models/Distribution';
 interface TableProps {
   distributions: Distribution[];
   listFooterComponent?: React.ReactElement | null;
+  renderBelowCard?: React.ReactNode; // ya no se usará
 }
 
 const statusColors: Record<string, { bg: string; color: string; border: string }> = {
@@ -95,15 +96,19 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   detailsBtn: {
-    backgroundColor: '#2563eb',
+    backgroundColor: '#fff',
     paddingHorizontal: 16,
     paddingVertical: 6,
     borderRadius: 6,
+    borderWidth: 1,
+    borderColor: '#2563eb',
+    alignItems: 'center',
   },
   detailsText: {
-    color: '#fff',
+    color: '#2563eb',
     fontWeight: 'bold',
     fontSize: 14,
+    letterSpacing: 0.2,
   },
 });
 

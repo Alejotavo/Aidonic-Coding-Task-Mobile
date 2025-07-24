@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useFilteredDistributions } from '../hooks/useFilteredDistributions';
 import { usePaginatedData } from '../hooks/usePaginatedData';
 import { distributions } from '../services/MockApi';
@@ -34,20 +34,60 @@ const TableContainer: React.FC = () => {
         regionOptions={regionOptions}
         onStatusChange={setStatus}
         onRegionChange={setRegion}
+        onClearFilters={() => {
+          setStatus('');
+          setRegion('');
+        }}
       />
       <Table
         distributions={paginated}
         listFooterComponent={
-          <Pagination
-            currentPage={currentPage}
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            onPageChange={setCurrentPage}
-          />
+          <>
+            {(!!status || !!region) && (
+              <TouchableOpacity
+                style={clearBelowStyles.clearBtn}
+                onPress={() => {
+                  setStatus('');
+                  setRegion('');
+                }}
+              >
+                <Text style={clearBelowStyles.clearBtnText}>Clear Search</Text>
+              </TouchableOpacity>
+            )}
+            <Pagination
+              currentPage={currentPage}
+              totalItems={totalItems}
+              itemsPerPage={itemsPerPage}
+              onPageChange={setCurrentPage}
+            />
+          </>
         }
       />
     </View>
   );
 };
 
-export default TableContainer; 
+export default TableContainer;
+
+const clearBelowStyles = StyleSheet.create({
+  clearBtn: {
+    backgroundColor: '#2563eb', // azul primario
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 6,
+    alignSelf: 'center',
+    marginBottom: 16,
+    marginTop: 8,
+    shadowColor: '#2563eb',
+    shadowOpacity: 0.12,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 2,
+  },
+  clearBtnText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+    letterSpacing: 0.5,
+  },
+}); 

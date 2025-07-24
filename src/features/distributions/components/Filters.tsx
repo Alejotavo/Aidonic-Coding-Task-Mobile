@@ -9,6 +9,7 @@ interface FiltersProps {
   regionOptions: string[];
   onStatusChange: (value: string) => void;
   onRegionChange: (value: string) => void;
+  onClearFilters?: () => void;
 }
 
 const Filters: React.FC<FiltersProps> = ({
@@ -48,11 +49,26 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginBottom: 12,
     gap: 8,
-    marginTop: 16, // 1rem aprox
+    marginTop: 16,
+    alignItems: 'center',
   },
   pickerWrapper: {
     flex: 1,
     marginHorizontal: 4,
+  },
+  clearBtnWrapper: {
+    marginLeft: 8,
+  },
+  clearBtn: {
+    backgroundColor: '#ef4444',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 4,
+  },
+  clearBtnText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 14,
   },
 });
 
@@ -64,7 +80,7 @@ const pickerSelectStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#2563eb',
     borderRadius: 4,
-    color: '#374151', // gris oscuro
+    color: '#374151',
     backgroundColor: '#fff',
     marginBottom: 4,
   },
@@ -75,7 +91,7 @@ const pickerSelectStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#2563eb',
     borderRadius: 4,
-    color: '#374151', // gris oscuro
+    color: '#374151',
     backgroundColor: '#fff',
     marginBottom: 4,
   },
