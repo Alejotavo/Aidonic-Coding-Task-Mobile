@@ -7,7 +7,6 @@ import type { Distribution } from '../../../shared/models/Beneficiary';
 interface TableProps {
   distributions: Distribution[];
   listFooterComponent?: React.ReactElement | null;
-  renderBelowCard?: React.ReactNode; // ya no se usará
 }
 
 const statusColors: Record<string, { bg: string; color: string; border: string }> = {
