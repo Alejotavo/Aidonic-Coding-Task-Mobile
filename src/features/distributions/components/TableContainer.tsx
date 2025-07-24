@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { distributions } from '../../../shared/services/MockApi';
 import { useFilteredDistributions } from '../hooks/useFilteredDistributions';
 import { usePaginatedData } from '../hooks/usePaginatedData';
-import { distributions } from '../services/MockApi';
 import Filters from './Filters';
 import { Pagination } from './Pagination';
 import Table from './Table';

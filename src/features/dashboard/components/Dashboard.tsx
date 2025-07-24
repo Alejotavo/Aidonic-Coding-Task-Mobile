@@ -1,19 +1,26 @@
 import React from 'react';
-import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, ScrollView, Text, View } from 'react-native';
 import { LineChart, PieChart } from 'react-native-chart-kit';
-import { distributions } from '../../distributions/services/MockApi';
+import { distributions } from '../../../shared/services/MockApi';
 
+interface PieChartData {
+  name: string;
+  population: number;
+  color: string;
+  legendFontColor: string;
+  legendFontSize: number;
+}
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   const screenWidth = Dimensions.get('window').width;
 
   const aidTypeColors = [
     '#4F8EF7', '#F76F8E', '#FFD166', '#06D6A0', '#A259F7', '#FFB347', '#FF6961', '#6EC6FF'
   ];
 
-  function getPieChartData() {
+  function getPieChartData(): PieChartData[] {
     // Agrupa beneficiarios por tipo de ayuda
-    const map = {};
+    const map: Record<string, number> = {};
     distributions.forEach(d => {
       if (!map[d.aidType]) map[d.aidType] = 0;
       map[d.aidType] += d.beneficiaries;
@@ -60,79 +67,44 @@ const Dashboard = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container} style={{ backgroundColor: '#f3f4f6' }}>
+    <ScrollView style={{ flex: 1, backgroundColor: '#f3f4f6' }} contentContainerStyle={{ padding: 16 }}>
       <View style={cardStyle}>
-        <Text style={styles.subtitle}>Aid Distribution by Type</Text>
+        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 8 }}>Beneficiaries by Aid Type</Text>
         <PieChart
           data={getPieChartData()}
-          width={screenWidth * 0.9 - 32}
-          height={220}
-          chartConfig={{
-            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          }}
-          accessor={'population'}
-          backgroundColor={'transparent'}
-          paddingLeft={'10'}
-          absolute
-          style={{ borderRadius: 12 }}
-        />
-      </View>
-      <View style={cardStyle}>
-        <Text style={styles.subtitle}>Beneficiaries per Distribution</Text>
-        <LineChart
-          data={getLineChartData()}
-          width={screenWidth * 0.9 - 32}
+          width={screenWidth - 32}
           height={220}
           chartConfig={{
             backgroundColor: '#fff',
             backgroundGradientFrom: '#fff',
             backgroundGradientTo: '#fff',
-            decimalPlaces: 0,
-            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-            style: { borderRadius: 12 },
+            color: (opacity = 1) => `rgba(33, 37, 41, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(33, 37, 41, ${opacity})`,
+          }}
+          accessor={'population'}
+          backgroundColor={'transparent'}
+          paddingLeft={'0'}
+          absolute
+        />
+      </View>
+      <View style={cardStyle}>
+        <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 8 }}>Beneficiaries Over Time</Text>
+        <LineChart
+          data={getLineChartData()}
+          width={screenWidth - 32}
+          height={220}
+          chartConfig={{
+            backgroundColor: '#fff',
+            backgroundGradientFrom: '#fff',
+            backgroundGradientTo: '#fff',
+            color: (opacity = 1) => `rgba(79, 142, 247, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(33, 37, 41, ${opacity})`,
           }}
           bezier
-          style={{ borderRadius: 12 }}
         />
       </View>
     </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    paddingVertical: 24,
-    paddingHorizontal: 8,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 12,
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginTop: 18,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  placeholderBox: {
-    width: '90%',
-    height: 220,
-    backgroundColor: '#f3f4f6',
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  placeholderText: {
-    color: '#888',
-    fontSize: 16,
-    fontStyle: 'italic',
-  },
-});
-
-export default Dashboard;
+export default Dashboard; 

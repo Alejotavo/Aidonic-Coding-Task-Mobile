@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
-import { distributionDetails } from '../src/features/distributions/services/MockApi';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { distributionDetails } from '../src/shared/services/MockApi';
 
 const DistributionDetailScreen: React.FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>();

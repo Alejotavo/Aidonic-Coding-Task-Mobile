@@ -2,7 +2,7 @@ import { useRouter } from 'expo-router';
 import React from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import type { Distribution } from '../models/Distribution';
+import type { Distribution } from '../../../shared/models/Beneficiary';
 
 interface TableProps {
   distributions: Distribution[];

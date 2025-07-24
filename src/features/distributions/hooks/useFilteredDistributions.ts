@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { Distribution } from '../models/Distribution';
+import type { Distribution } from '../../../shared/models/Beneficiary';
 
 export function useFilteredDistributions(
   distributions: Distribution[],
