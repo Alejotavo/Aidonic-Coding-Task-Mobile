@@ -21,9 +21,15 @@ export default function TabLayout() {
         tabBarStyle: Platform.select({
           ios: {
             position: 'absolute',
+            height: 120,
           },
-          default: {},
+          default: {
+            height: 120,
+          },
         }),
+        tabBarIconStyle: {
+          marginTop: 14,
+        },
       }}>
       <Tabs.Screen
         name="index"
