@@ -16,10 +16,10 @@ const statusColors: Record<string, { bg: string; color: string; border: string }
   Default: { bg: '#f3f4f6', color: '#374151', border: '#d1d5db' },
 };
 
-const Table: React.FC<TableProps> = ({ distributions, listFooterComponent }) => {
+const TableComponent: React.FC<TableProps> = ({ distributions, listFooterComponent }) => {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const renderItem = ({ item }: { item: Distribution }) => {
+  const renderItem = React.useCallback(({ item }: { item: Distribution }) => {
     const statusStyle = statusColors[item.status] || statusColors.Default;
     return (
       <View style={styles.card}>
@@ -42,7 +42,7 @@ const Table: React.FC<TableProps> = ({ distributions, listFooterComponent }) => 
         </View>
       </View>
     );
-  };
+  }, [router]);
   return (
     <FlatList
       data={distributions}
@@ -53,6 +53,8 @@ const Table: React.FC<TableProps> = ({ distributions, listFooterComponent }) => 
     />
   );
 };
+
+const Table = React.memo(TableComponent);
 
 const styles = StyleSheet.create({
   list: {

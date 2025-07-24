@@ -12,7 +12,7 @@ interface FiltersProps {
   onClearFilters?: () => void;
 }
 
-const Filters: React.FC<FiltersProps> = ({
+const FiltersComponent: React.FC<FiltersProps> = ({
   status,
   region,
   statusOptions,
@@ -41,6 +41,8 @@ const Filters: React.FC<FiltersProps> = ({
     </View>
   </View>
 );
+
+const Filters = React.memo(FiltersComponent);
 
 const styles = StyleSheet.create({
   container: {
