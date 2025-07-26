@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 
@@ -12,37 +12,39 @@ interface FiltersProps {
   onClearFilters?: () => void;
 }
 
-const FiltersComponent: React.FC<FiltersProps> = ({
+function FiltersComponent({
   status,
   region,
   statusOptions,
   regionOptions,
   onStatusChange,
   onRegionChange,
-}) => (
-  <View style={styles.container}>
-    <View style={styles.pickerWrapper}>
-      <RNPickerSelect
-        onValueChange={onStatusChange}
-        items={[{ label: 'See all', value: '' }, ...statusOptions.map(opt => ({ label: opt, value: opt }))]}
-        value={status}
-        placeholder={{}}
-        style={pickerSelectStyles}
-      />
+}: FiltersProps) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.pickerWrapper}>
+        <RNPickerSelect
+          onValueChange={onStatusChange}
+          items={[{ label: 'See all', value: '' }, ...statusOptions.map(opt => ({ label: opt, value: opt }))]}
+          value={status}
+          placeholder={{}}
+          style={pickerSelectStyles}
+        />
+      </View>
+      <View style={styles.pickerWrapper}>
+        <RNPickerSelect
+          onValueChange={onRegionChange}
+          items={[{ label: 'See all', value: '' }, ...regionOptions.map(opt => ({ label: opt, value: opt }))]}
+          value={region}
+          placeholder={{}}
+          style={pickerSelectStyles}
+        />
+      </View>
     </View>
-    <View style={styles.pickerWrapper}>
-      <RNPickerSelect
-        onValueChange={onRegionChange}
-        items={[{ label: 'See all', value: '' }, ...regionOptions.map(opt => ({ label: opt, value: opt }))]}
-        value={region}
-        placeholder={{}}
-        style={pickerSelectStyles}
-      />
-    </View>
-  </View>
-);
+  );
+}
 
-const Filters = React.memo(FiltersComponent);
+const Filters = memo(FiltersComponent);
 
 const styles = StyleSheet.create({
   container: {

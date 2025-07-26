@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Filters from '../../../shared/components/Filters';
 import { Pagination } from '../../../shared/components/Pagination';
@@ -9,7 +9,7 @@ import { usePaginatedData } from '../hooks/usePaginatedData';
 
 const getUnique = (arr: string[]) => Array.from(new Set(arr));
 
-const TableContainer: React.FC = () => {
+function TableContainer() {
   const [status, setStatus] = useState('');
   const [region, setRegion] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +23,7 @@ const TableContainer: React.FC = () => {
   const paginated = usePaginatedData(filtered, currentPage, itemsPerPage);
 
   // Reset page if filters change
-  React.useEffect(() => { setCurrentPage(1); }, [status, region]);
+  useEffect(() => { setCurrentPage(1); }, [status, region]);
 
   return (
     <View>

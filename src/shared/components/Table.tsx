@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { Distribution } from '../../shared/models/Beneficiary';
@@ -16,10 +16,10 @@ const statusColors: Record<string, { bg: string; color: string; border: string }
   Default: { bg: '#f3f4f6', color: '#374151', border: '#d1d5db' },
 };
 
-const TableComponent: React.FC<TableProps> = ({ distributions, listFooterComponent }) => {
+function TableComponent({ distributions, listFooterComponent }: TableProps) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const renderItem = React.useCallback(({ item }: { item: Distribution }) => {
+  const renderItem = useCallback(({ item }: { item: Distribution }) => {
     const statusStyle = statusColors[item.status] || statusColors.Default;
     return (
       <View style={styles.card}>

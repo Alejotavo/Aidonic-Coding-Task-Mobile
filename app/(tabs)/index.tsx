@@ -1,14 +1,13 @@
-import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import TableContainer from '../../src/features/distributions/components/TableContainer';
 
-const MainScreen: React.FC = () => {
+function MainScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <TableContainer />
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

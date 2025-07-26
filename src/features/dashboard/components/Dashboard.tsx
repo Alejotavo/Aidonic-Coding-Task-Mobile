@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimensions, ScrollView, Text, View } from 'react-native';
 import { LineChart, PieChart } from 'react-native-chart-kit';
 import { useDashboardCharts } from '../hooks/useDashboardCharts';
 
-const Dashboard: React.FC = () => {
+function Dashboard() {
   const cardHorizontalPadding = 16;
   const { getPieChartData, getLineChartData, cardStyle } = useDashboardCharts(Dimensions.get('window').width);
-  const [chartWidth, setChartWidth] = React.useState(Dimensions.get('window').width - cardHorizontalPadding * 2);
+  const [chartWidth, setChartWidth] = useState(Dimensions.get('window').width - cardHorizontalPadding * 2);
 
   return (
     <ScrollView

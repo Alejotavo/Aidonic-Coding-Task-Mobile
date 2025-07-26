@@ -1,9 +1,8 @@
 import { useLocalSearchParams } from 'expo-router';
-import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { distributionDetails } from '../src/shared/services/MockApi';
 
-const DistributionDetailScreen: React.FC = () => {
+function DistributionDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const detail = id ? distributionDetails[id] : null;
 
